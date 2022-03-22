@@ -1,13 +1,13 @@
 module.exports = function (wallaby) {
-    return {
-      files: [
-        'src/**/*.ts'
-      ],
+  return {
+    files: ["src/**/*.ts", "src/**/*.js", "src/**/*.json"],
 
-      tests: [
-        'test/**/*.test.ts'
-      ],
+    tests: ["test/**/*.test.ts", "test/**/*.test.js"],
 
-      testFramework: 'mocha'
-    };
+    env: {
+      type: "node",
+    },
+
+    testFramework: "mocha",
   };
+};
