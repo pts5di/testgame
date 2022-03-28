@@ -1,5 +1,3 @@
-import spells from "./spells.json";
-
 export type Spell = {
   element: string;
   type: string;
@@ -23,11 +21,24 @@ type SpellList = {
   };
 };
 export default class Incantengine {
+  private spellList: SpellList;
+  constructor(spellList: SpellList) {
+    this.spellList = spellList;
+  }
+  public getAllSpells(): string[] {
+    const allSpells: string[] = [];
+    for (const element of Object.keys(this.spellList.elements)) {
+      for (const type of Object.keys(this.spellList.spellTypes)) {
+        allSpells.push(`${element} ${type}`);
+      }
+    }
+    return allSpells;
+  }
   public validate(chant: string): boolean {
     let chantWords: string[] = chant.split(" ");
     if (
-      spells.elements.hasOwnProperty(chantWords[0]) &&
-      spells.spellTypes.hasOwnProperty(chantWords[1])
+      this.spellList.elements.hasOwnProperty(chantWords[0]) &&
+      this.spellList.spellTypes.hasOwnProperty(chantWords[1])
     ) {
       return true;
     }
@@ -37,11 +48,10 @@ export default class Incantengine {
     if (!this.validate(chant)) {
       return null;
     }
-    const spellList: SpellList = spells;
     let chantWords: string[] = chant.split(" ");
     const castSpell = {
       element: chantWords[0],
-      ...spellList.spellTypes[chantWords[1]],
+      ...this.spellList.spellTypes[chantWords[1]],
     };
 
     return castSpell;

@@ -1,5 +1,8 @@
 {
-  "elements": { "rock": { "weakAgainst": "paper" } },
+  "elements": {
+    "rock": { "weakAgainst": "paper" },
+    "paper": { "weakAgainst": "scissors" }
+  },
   "spellTypes": {
     "bolt": { "type": "attack", "baseDamage": 10, "castTime": 10 }
   }
